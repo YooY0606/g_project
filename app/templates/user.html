@@ -1,0 +1,216 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人資料</title>
+
+<style>
+   #h1 {
+   font-size: 24px;
+   font-weight: 700;
+   margin-bottom: 25px;
+   color: #87ceeb;
+   text-align: center; 
+   }
+   #pictureUrl { 
+   border-radius: 100%;
+   width: 150px;
+   }
+   #cpContainer{
+   width: auto;
+   height: auto;
+   padding: 20px;
+   background-color: rgb(255, 255, 255);
+   border-radius: 12px;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   }
+   #wrapper{
+   width: 100%;
+   }
+   body{
+   background: #87ceeb;
+   padding: 0 10px;
+   }
+   p{
+   width: 200px;
+   color: #757575;
+   margin-right: 10px;
+   font-size: 14px;
+   }
+
+   input[type=text] {
+   width: 100%;
+   outline: none;
+   border: 1px solid #d5dbd9;
+   font-size: 15px;
+   padding: 8px 10px;
+   border-radius: 3px;
+   transition: all 0.3s ease;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   /*input[type=text]:focus {
+      background-color: lightblue;
+   }*/
+   input[type=date] {
+   width: 100%;
+   outline: none;
+   border: 1px solid #d5dbd9;
+   font-size: 15px;
+   padding: 16px 20px;
+   border-radius: 3px;
+   transition: all 0.3s ease;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   input[type=hidden] {
+   margin: 20px;
+   padding: 15px;
+   height: 35px;
+   width: 500px;
+   font-size: 20px;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   select {
+   width: 100%;
+   outline: none;
+   border: 1px solid #d5dbd9;
+   font-size: 15px;
+   padding: 8px 10px;
+   border-radius: 3px;
+   transition: all 0.3s ease;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   input[type=submit]{
+   width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin:  auto;
+   display: flex;
+   text-align: center;
+   justify-content: center; 
+   }
+   #display-image{
+   width: 400px;
+   height: 400px;
+   border: 1px solid black;
+   background-position: center;
+   background-size: cover;
+}
+</style>
+</head>
+   <body>
+      <div>
+         <div id="cpContainer">
+            <h1 id="h1">個人資料</h1>
+            <img id="pictureUrl">
+            <form action = "{{ url_for('result') }}" method = "POST">
+               <div id="wrapper">
+               <p><input class="form-control" type="hidden" id="userid"  name = "userid"/> </p>
+               <!--<p>頭貼:  <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+                  <div id="display-image"></div>-->
+               <p>暱稱: <input placeholder="暱稱..." type = "text" name = "暱稱" /></p>
+               <p>血型: 
+                  <select name = "血型" >
+                     <option value="A型">A型</option>
+                     <option value="B型">B型</option>
+                     <option value="O型">O型</option>
+                     <option value="AB型">AB型</option>
+                  </select>
+               </p>
+               <p>出生年: 
+                  <input value="2017-06-01" type = "date" name = "出生年" />
+               </p>
+               <p>性別: 
+                  <select name = "性別" >
+                     <option value="男">男</option>
+                     <option value="女">女</option>
+                  </select>
+               </p>
+               <p>地區: 
+                  <select name = "地區" >
+                     <option value="台北">台北</option>
+                     <option value="新竹">新竹</option>
+                     <option value="台中">台中</option>
+                     <option value="台南">台南</option>
+                     <option value="高雄">高雄</option>
+                  </select>
+               </p>
+               <div id="other">
+                  <p>備註: <input placeholder="備註..." type ="text" name = "備註" height="10%"/></p>
+               </div>
+               <p ><input type = "submit" value = "提交"/></p>
+            </div>
+            </form>
+         </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+      <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+      <script>
+            /*function runApp() {
+               liff.getProfile().then(profile => {
+                  document.getElementById("pictureUrl").src = profile.pictureUrl;
+                  //document.getElementById("userId") = profile.userId
+                  //document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+                  $("#userid").val(profile.userId);
+                  //document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
+                  //document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
+                  //document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+               }).catch(err => console.error(err));
+             }
+            liff.init({ liffId: "1656899274-nYGwwb27" }, () => {
+               if (liff.isLoggedIn()) {
+               runApp()
+               } else {
+               liff.login();
+               }
+            }, err => console.error(err.code, error.message));*/
+            liff.init({
+                     liffId: '1657366253-D9Zk1m7l'
+                 })
+                 .then(() => {
+                  if (!liff.isLoggedIn()) {
+                     alert("用戶未登入");
+                     liff.login();
+                  } 
+                  else {
+                  liff.getProfile()
+                  .then(profile => {
+                     $("#userid").val(profile.userId);
+                     document.getElementById("pictureUrl").src = profile.pictureUrl;
+                     const userId = profile.userId
+                     })
+                     .catch((err) => {
+                     console.log('error', err);
+                     })
+                  }})
+                 .catch((err) => {
+                   console.log('初始化失敗')
+                 })
+            /*const image_input = document.querySelector("#image-input");
+
+            image_input.addEventListener("change", function() {
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+               const uploaded_image = reader.result;
+               document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+            });
+            reader.readAsDataURL(this.files[0]);
+            });*/
+     </script>
+   </body>
+</html>

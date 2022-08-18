@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>排行榜</title>
+</head>
+   <body>
+        <table class="table table-striped table-hover" width="75%">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">暱稱</th>
+                    <th scope="col">單倍分離術血小板次數</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% set lb_one = [] -%}
+                {% for record in dataclip %}
+                {% set name = "姓名" -%}
+                {% set num = "次數" -%}
+                    {% if not record["單倍分離術血小板"] %}
+                        {% set node = {name: record["姓名"], num: 0} -%}
+                        {% do lb_one.append(node) -%}
+                
+                    {% else %}
+                        {% set node_1 = {name: record["姓名"], num: record["單倍分離術血小板"]} -%}
+                        {% do lb_one.append(node_1) -%}
+                        
+                    {% endif %}
+                {% endfor %}
+
+                {% set counter = 1 -%}
+                {% for record in lb_one|sort(attribute="次數", reverse = True) %}
+                <tr>
+                    <th scope="row">{{ counter + loop.index0}}</th>
+                    <td>{{record["姓名"]}}</td>
+                    <td>{{record["次數"]}}</td>  
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+      <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"5></script>
+      <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+      <script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>
+      <script src="https://unpkg.com/bootstrap-table@1.15.3/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+      <script>
+            
+     </script>
+   </body>
+</html>

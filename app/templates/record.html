@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>捐血紀錄</title>
+<style>
+   #h1 {
+   font-size: 50px;
+   font-weight: 700;
+   margin-bottom: 25px;
+   color: #87ceeb;
+   text-align: center; 
+   }
+   #pictureUrl { 
+   display: block; 
+   margin: 0 auto 
+   }
+   #cpContainer{
+   width: auto;
+   height: auto;
+   padding: 20px;
+   background-color: rgb(255, 255, 255);
+   border-radius: 12px;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   }
+   body{
+   background: #87ceeb;
+   padding: 0 10px;
+   }
+   p{
+   width: 200px;
+   color: #757575;
+   margin-right: 10px;
+   font-size: 30px;
+   }
+
+   input[type=text] {
+   width: 100%;
+   outline: none;
+   border: 1px solid #d5dbd9;
+   font-size: 15px;
+   padding: 8px 10px;
+   border-radius: 3px;
+   transition: all 0.3s ease;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   /*input[type=text]:focus {
+      background-color: lightblue;
+   }*/
+   input[type=date] {
+   border: 1px solid #d5dbd9;
+   font-size: 30px;
+   padding: 16px 20px;
+   border-radius: 3px;
+   transition: all 0.3s ease;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   input[type=hidden] {
+   margin: 20px;
+   padding: 15px;
+   height: 35px;
+   width: 500px;
+   font-size: 20px;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   select {
+   
+   border: 1px solid #d5dbd9;
+   font-size: 30px;
+   padding: 16px 20px;
+   border-radius: 3px;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   input[type=submit]{
+   width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 20px 10px;
+	margin:  auto;
+   display: flex;
+   text-align: center;
+   justify-content: center; 
+   font-size: 30px;
+   }
+</style>
+</head>
+   <body>
+      <div>
+         <div id="cpContainer">
+            <h1 id="h1">捐血紀錄</h1>
+            <form action = "{{ url_for('r_result') }}" method = "POST">
+               <p><input class="form-control" type="hidden" id="userid"  name = "userid"/> </p>
+               <p>捐血時間: <input value="2017-06-01" type = "date" name = "時間" /></p>
+               <p>捐血方式: 
+                  <select name = "捐血方式" >
+                     <option value="250cc全血">250cc全血</option>
+                     <option value="500cc全血">500cc全血</option>
+                     <option value="單倍分離術血小板">單倍分離術血小板</option>
+                     <option value="雙倍分離術血小板">雙倍分離術血小板</option>
+                  </select>
+               </p>
+               <p ><input type = "submit" value = "提交"/></p>
+            </form>
+         </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+      <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+      <script>
+            /*function runApp() {
+               liff.getProfile().then(profile => {
+                  document.getElementById("pictureUrl").src = profile.pictureUrl;
+                  //document.getElementById("userId") = profile.userId
+                  //document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+                  $("#userid").val(profile.userId);
+                  //document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
+                  //document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
+                  //document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+               }).catch(err => console.error(err));
+             }
+            liff.init({ liffId: "1656899274-nYGwwb27" }, () => {
+               if (liff.isLoggedIn()) {
+               runApp()
+               } else {
+               liff.login();
+               }
+            }, err => console.error(err.code, error.message));*/
+            liff.init({
+                     liffId: '1657366253-24N7XJlg'
+                 })
+                 .then(() => {
+                  if (!liff.isLoggedIn()) {
+                     alert("用戶未登入");
+                     liff.login();
+                  } 
+                  else {
+                  liff.getProfile()
+                  .then(profile => {
+                     alert("若未填寫個人資料請先新增個人資料！")
+                     $("#userid").val(profile.userId);
+                     $("#userphoto").val(profile.pictureUrl);
+                     const userId = profile.userId
+                     })
+                     .catch((err) => {
+                     console.log('error', err);
+                     })
+                  }})
+                 .catch((err) => {
+                   console.log('初始化失敗')
+                 })
+     </script>
+   </body>
+</html>

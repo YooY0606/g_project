@@ -1,0 +1,129 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>個人資料列表</title>
+<style>
+   #h1 {
+   font-size: 60px;
+   font-weight: 700;
+   margin-bottom: 25px;
+   color: #87ceeb;
+   text-align: center; 
+   }
+   #pictureUrl { 
+   border-radius: 100%;
+   width: 200px;
+   }
+   #cpContainer{
+   width: auto;
+   height: auto;
+   background-color: rgb(255, 255, 255);
+   border-radius: 12px;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   }
+   #wrapper{
+   width: 100%;
+   }
+   body{
+   background: #87ceeb;
+   padding: 0 10px;
+   }
+   p{
+   width: auto;
+   color: #757575;
+   font-size: 40px;
+   text-align: center;
+   }
+   input[type=hidden] {
+   margin: 20px;
+   padding: 15px;
+   height: 35px;
+   width: 500px;
+   font-size: 20px;
+   text-align: center;
+   display: flex;
+   margin: auto
+   }
+   input[type=submit]{
+   width: 200px;
+   height: 50px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 20px 10px;
+	margin:  auto;
+   display: flex;
+   text-align: center;
+   justify-content: center; 
+   }
+   #display-image{
+   width: 400px;
+   height: 400px;
+   border: 1px solid black;
+   background-position: center;
+   background-size: cover;
+}
+</style>
+</head>
+   <body>
+      <div>
+         <div id="cpContainer">
+            <h1 id="h1">個人資料</h1>
+            <img id="pictureUrl">
+               <div id="wrapper">
+               {% for record in dataclip %}
+               <p>暱稱: {{record["暱稱"]}}</p>
+               <p>血型: {{record["血型"]}}</p>
+               <p>出生年: {{record["出生年"]}} </p>
+               <p>性別: {{record['性別']}}</p>
+               <p>地區: {{record['地區']}}</p>
+               <div id="other">
+                  <p>備註: {{record['備註']}}</p>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+      <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+      <script>
+               /*liff.init({
+                     liffId: '1657366253-3YvQV5WL'
+                 })
+                 .then(() => {
+                  if (!liff.isLoggedIn()) {
+                     alert("用戶未登入");
+                     liff.login();
+                  } 
+                  else {
+                  liff.getProfile()
+                  .then(profile => {
+                     $("#userid").val(profile.userId);
+                     document.getElementById("pictureUrl").src = profile.pictureUrl;
+                     var userId = profile.userId
+                     console.log(userId)
+                        $.ajax({
+                        url: "/route_function",
+                        type: "POST",
+                        data: JSON.stringify (userId),
+                        success: function(data) { alert('hi!'); },
+                        contentType: "application/json",
+                        dataType: 'json'
+                        });     
+                  })
+                     .catch((err) => {
+                     console.log('error', err);
+                     })
+                  }})
+                 .catch((err) => {
+                   console.log('初始化失敗')
+                 })*/
+     </script>
+   </body>
+</html>
